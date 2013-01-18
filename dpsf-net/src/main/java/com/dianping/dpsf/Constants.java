@@ -22,7 +22,8 @@ public class Constants {
 	public static final int MESSAGE_TYPE_SERVICE = 2;
 	public static final int MESSAGE_TYPE_EXCEPTION = 3;
 	public static final int MESSAGE_TYPE_SERVICE_EXCEPTION = 4;
-	
+	public static final int MESSAGE_TYPE_SERVICE_MOCK = 5;
+
 	public static final byte SERILIZABLE_PB = 1;
 	public static final byte SERILIZABLE_HESSIAN = 2;
 	public static final byte SERILIZABLE_JAVA = 3;

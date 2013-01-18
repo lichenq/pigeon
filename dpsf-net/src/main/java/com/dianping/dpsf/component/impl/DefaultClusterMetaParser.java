@@ -1,16 +1,17 @@
 package com.dianping.dpsf.component.impl;
 
-import com.dianping.dpsf.Constants;
-import com.dianping.dpsf.component.ClusterMeta;
-import com.dianping.dpsf.component.ClusterMetaParser;
-import com.dianping.dpsf.exception.DPSFException;
-import com.dianping.dpsf.invoke.filter.ClusterDelegateInvokeFilter;
-import com.dianping.dpsf.invoke.filter.cluster.FailoverClusterInvokeFilter;
-import org.apache.commons.lang.StringUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.dianping.dpsf.Constants;
+import com.dianping.dpsf.component.ClusterMeta;
+import com.dianping.dpsf.component.ConfigMetaParser;
+import com.dianping.dpsf.exception.DPSFException;
+import com.dianping.dpsf.invoke.filter.ClusterDelegateInvokeFilter;
+import com.dianping.dpsf.invoke.filter.cluster.FailoverClusterInvokeFilter;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,7 +20,7 @@ import java.util.Set;
  * Time: 下午2:18
  * To change this template use File | Settings | File Templates.
  */
-public class DefaultClusterMetaParser implements ClusterMetaParser {
+public class DefaultClusterMetaParser implements ConfigMetaParser<ClusterMeta> {
 
     @Override
     public ClusterMeta parse(Map<String, String> clusterConfig) {

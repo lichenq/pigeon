@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.dianping.dpsf.component.ClusterMetaParser;
+import com.dianping.dpsf.component.ConfigMetaParser;
 import com.dianping.dpsf.component.impl.DefaultClusterMetaParser;
 import com.dianping.dpsf.exception.DPSFException;
 import com.dianping.dpsf.invoke.RemoteInvocationHandlerFactory;
@@ -64,7 +64,7 @@ public class ProxyFactory<IFACE>{
 	private LoadBalance loadBalanceObj;
     private Map<InvocationInvokeFilter.InvokePhase, List<InvocationInvokeFilter>> customizedInvocationFilters;
     private Map<String, String> clusterConfig;
-    private ClusterMetaParser clusterMetaParser = new DefaultClusterMetaParser();
+    private ConfigMetaParser clusterMetaParser = new DefaultClusterMetaParser();
 
     public void init() {
         PigeonBootStrap.setupClient();

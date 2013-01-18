@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.dianping.dpsf.component.ClusterMetaParser;
+import com.dianping.dpsf.component.ClusterMeta;
+import com.dianping.dpsf.component.ConfigMetaParser;
+import com.dianping.dpsf.component.MockMeta;
+import com.dianping.dpsf.component.MockMetaParser;
 import com.dianping.dpsf.component.impl.DefaultClusterMetaParser;
 import com.dianping.dpsf.invoke.ProxyInvoker;
 import com.dianping.dpsf.invoke.RemoteInvocationHandlerFactory;
@@ -73,16 +76,17 @@ public class ProxyBeanFactory implements FactoryBean {
 	private LoadBalance loadBalanceObj;
     private Map<InvokePhase, List<InvocationInvokeFilter>> customizedInvocationFilters;
     private Map<String, String> clusterConfig;
-    private ClusterMetaParser clusterMetaParser = new DefaultClusterMetaParser();
+    private ConfigMetaParser<ClusterMeta> clusterMetaParser = new DefaultClusterMetaParser();
+    private Map<String,String> mockConfig;
+    private ConfigMetaParser<MockMeta> mockMetaParser = new MockMetaParser();
 
 	private boolean isTest = false;
-
-	/**
+    /**
 	 * 是否对写Buffer限制大小(对于channel使用到的queue buffer的大小限制, 避免OutOfMemoryError)
 	 */
 	private boolean writeBufferLimit = PigeonConfig.getDefaultWriteBufferLimit();
 
-	public void init() throws SecurityException, IllegalArgumentException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException  {
+    public void init() throws SecurityException, IllegalArgumentException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException  {
         PigeonBootStrap.setupClient();
 		this.serviceName = this.serviceName.trim();
 		this.serialize = this.serialize.trim();
@@ -203,6 +207,7 @@ public class ProxyBeanFactory implements FactoryBean {
 		this.objType = Class.forName(this.iface);
         DPSFMetaData metadata = new DPSFMetaData(this.serviceName, this.timeout, this.callMethod, this.serialize, this.callback, this.group, this.writeBufferLimit);
         metadata.setClusterMeta(clusterMetaParser.parse(clusterConfig));
+        metadata.setMockMeta(mockMetaParser.parse(mockConfig));
         this.obj = Proxy.newProxyInstance(ProxyBeanFactory.class.getClassLoader(), new Class[] { this.objType },
                 new ProxyInvoker(metadata, RemoteInvocationHandlerFactory.createInvokeHandler(customizedInvocationFilters)));
 	}

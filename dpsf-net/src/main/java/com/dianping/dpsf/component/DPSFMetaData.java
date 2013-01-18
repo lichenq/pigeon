@@ -33,6 +33,8 @@ public class DPSFMetaData {
 
     private ClusterMeta clusterMeta;
 
+    private MockMeta mockMeta;
+
 	private boolean writeBufferLimit;
 	
 	public DPSFMetaData(String serviceName,int timeout,String group, boolean writeBufferLimit){
@@ -159,4 +161,11 @@ public class DPSFMetaData {
         this.clusterMeta = clusterMeta;
     }
 
+    public MockMeta getMockMeta() {
+        return mockMeta;
+    }
+
+    public void setMockMeta(MockMeta mockMeta) {
+        this.mockMeta = mockMeta;
+    }
 }

@@ -9,8 +9,8 @@ import java.util.Map;
  * Time: 下午2:15
  * To change this template use File | Settings | File Templates.
  */
-public interface ClusterMetaParser {
+public interface ConfigMetaParser<T> {
 
-    ClusterMeta parse(Map<String, String> clusterConfig);
+    T parse(Map<String, String> configMap);
 
 }

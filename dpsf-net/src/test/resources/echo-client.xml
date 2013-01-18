@@ -24,7 +24,12 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
         <!--</property>-->
         <property name="clusterConfig">
             <map>
-                <entry key="getorder" value="cluster:fail-over,retry:2,timeout-retry:0"/>
+                <entry key="getorder|setorder" value="cluster:fail-over,retry:2,timeout-retry:0"/>
+            </map>
+        </property>
+        <property name="mockConfig">
+            <map>
+                <entry key="com.dianping.dpsf.other.echo.EchoMock" value="echo,echo1"/>
             </map>
         </property>
 	</bean>
